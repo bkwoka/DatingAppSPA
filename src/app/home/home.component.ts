@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   registerToggle() {
     this.registerMode = true;
   }
-
   cancelRegisterMode(cancelRegisterFromRegisterComponent: any) {
       this.registerMode = cancelRegisterFromRegisterComponent;
   }
