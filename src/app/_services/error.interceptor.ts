@@ -19,7 +19,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError(httpErrorResponse => {
         // 401 error
         if (httpErrorResponse.status === 401) {
-          return throwError(httpErrorResponse.error.title)
+          return throwError('Unauthorized')
         }
 
         if (httpErrorResponse instanceof HttpErrorResponse) {
