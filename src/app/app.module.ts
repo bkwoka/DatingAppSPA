@@ -5,13 +5,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JwtModule} from "@auth0/angular-jwt";
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import {AppComponent} from './app.component';
 import {NavComponent} from './nav/nav.component';
 import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './register/register.component';
 import {ErrorInterceptorProvider} from "./_services/error.interceptor";
-import {BsDatepickerModule, BsDropdownModule, TabsModule} from "ngx-bootstrap";
+import {BsDatepickerModule, BsDropdownModule, ButtonsModule, PaginationModule, TabsModule} from "ngx-bootstrap";
 import {ListsComponent} from './lists/lists.component';
 import {MessagesComponent} from './messages/messages.component';
 import {appRoutes} from "./routes";
@@ -29,6 +30,7 @@ import {UserService} from "./_services/user.service";
 import {PreventUnsavedChangesGuard} from "./_guards/prevent-unsaved-changes.guard";
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import {FileUploadModule} from "ng2-file-upload";
+import {MemberListResolver} from "./_resolvers/member-list.resolver";
 
 
 export function tokenGetter() {
@@ -55,7 +57,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
@@ -75,7 +79,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
         blacklistedRoutes: ['localhost:5000/api/auth']
       }
     }),
-    FileUploadModule
+    FileUploadModule,
   ],
   providers: [
     AuthService,
@@ -85,6 +89,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     UserService,
     MemberDetailResolver,
     MemberEditResolver,
+    MemberListResolver,
     PreventUnsavedChangesGuard,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
